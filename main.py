@@ -17,6 +17,7 @@ tg_name="cpu-target-group2"             #Target group name
 lt_name='cpu-burner-template2'          #launch template name
 asg_name = "cpu-burner-autoscaling2"    #autoscaling group name
 pol_name = 'cpu-policy'                 #policy name
+nlb_name="cpu-LB2"                      #loadbalancer name
 
 # --- Clients ---
 ec2_client = boto3.client(
@@ -54,7 +55,6 @@ target_group_arn = tg_response['TargetGroups'][0]['TargetGroupArn']
 print("Target Group ARN:", target_group_arn)
 
 # --- Step 2: Create Network Load Balancer ---
-nlb_name="cpu-LB2"
 nlb_response = elbv2_client.create_load_balancer(
     Name=nlb_name,
     Subnets=[subnet],  # replace with your subnets
